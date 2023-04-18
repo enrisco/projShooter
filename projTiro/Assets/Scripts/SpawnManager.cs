@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] GameObject ARCamera;
+    [SerializeField] ShootingController player;
     [SerializeField] GameObject[] spawnObjects;
     [SerializeField] int min, max;
     // Start is called before the first frame update
@@ -25,8 +27,12 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < spawnObjects.Length; i++)
         {
-            GameObject ballon = Instantiate(spawnObjects[i], pos, Quaternion.identity);
-            ballon.transform.Translate(Camera.main.transform.right * 2 * i);
+            GameObject enemy = Instantiate(spawnObjects[i], pos, Quaternion.identity);
+            enemy.transform.Translate(Camera.main.transform.right * 2 * i);
+            var e = enemy.GetComponent<EnemyScript>();
+            e.camera = ARCamera;
+            e.player = player;
+
         }
 
         StartCoroutine(SpawnObject());
