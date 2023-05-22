@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShootingController : MonoBehaviour
@@ -21,6 +22,11 @@ public class ShootingController : MonoBehaviour
     {
         life--;
         textLife.text = "Vida: " + life;
+        if(life == 0)
+        {
+            GameOverController.isGameOver = true;
+            SceneManager.LoadScene("sceMain");
+        }
     }
 
     private void Shoot()
